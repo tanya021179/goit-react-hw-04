@@ -1,0 +1,16 @@
+.header {
+  background-color: rgb(93, 93, 209);
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0;
+  transition: box-shadow 0.3s;
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.input {
+  width: 400px;
+}
