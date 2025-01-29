@@ -11,8 +11,10 @@ const ImageGallery = ({ articles }) => {
       {articles.map((item) => (
         <li className={s.item} key={item.id}>
           <ImageCard item={item} />
-          <p>{item.alt_description}</p>
-          <p>Likes: {item.likes}</p>
+          <div className={s.text}>
+            <p>{item.alt_description}</p>
+            <p>Likes: {item.likes}</p>
+          </div>
         </li>
       ))}
     </ul>

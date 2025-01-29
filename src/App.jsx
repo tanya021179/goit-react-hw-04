@@ -5,12 +5,14 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { Toaster } from "react-hot-toast";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 
 const App = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const getData = async () => {
@@ -18,8 +20,8 @@ const App = () => {
       try {
         setIsLoading(true);
         setIsError(false);
-        const data = await fetchArticles(query);
-        setArticles(data);
+        const data = await fetchArticles(query, page);
+        setArticles((prev) => [...prev, ...data]);
       } catch {
         setIsError(true);
       } finally {
@@ -27,26 +29,27 @@ const App = () => {
       }
     };
     getData();
-  }, [query]);
+  }, [query, page]);
 
   const handleSetQuery = (newQuery) => {
+    console.log(newQuery);
     setQuery(newQuery);
+    setArticles([]);
+    setPage(1);
   };
+
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1);
+  }
 
   return (
     <>
       <Toaster />
-      <SearchBar handleSetQuery={handleSetQuery} />
-      <ImageGallery articles={articles} />
+      <SearchBar onSubmit={handleSetQuery} />
+      {articles.length > 0 && <ImageGallery articles={articles} />}
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-
-      {/* {!isLoading && !isError && articles.length > 0 && (
-        <ImageGallery articles={articles} />
-      )}
-      {!isLoading && !isError && articles.length === 0 && (
-        <p>No images found</p>
-      )} */}
+      <LoadMoreBtn onLoadMore={handleLoadMore}/>
     </>
   );
 };
