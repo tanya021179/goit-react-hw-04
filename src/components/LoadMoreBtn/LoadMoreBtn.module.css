@@ -1,6 +1,14 @@
+.containerBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
 .button {
   padding: 10px 20px;
-  background-color: rgb(146, 139, 130);
+  background-color: rgb(186, 173, 157);
 
   border: 1px solid #564949;
   border-radius: 5px;
