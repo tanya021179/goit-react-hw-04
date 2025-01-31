@@ -38,7 +38,6 @@ const App = () => {
   }, [query, page]);
 
   const handleSetQuery = (newQuery) => {
-    console.log(newQuery);
     setQuery(newQuery);
     setArticles([]);
     setPage(1);

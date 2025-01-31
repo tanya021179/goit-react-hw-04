@@ -7,12 +7,12 @@ const SearchBar = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(value);
-
     if (!value) {
       toast.error("Please enter a query to search for images.");
       return;
     }
+    onSubmit(value);
+    setValue("");
   };
 
   return (
